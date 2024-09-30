@@ -5,6 +5,11 @@ to OpenAI's Realtime API.
 **This library is in beta and should not be treated as a final implementation.**
 You can use it to easily prototype conversational apps.
 
+**The easiest way to get playing with the API right away** is to use the
+[**Realtime Console**](https://github.com/openai/openai-realtime-console), it uses
+the reference client to deliver a fully-functional API inspector with examples
+of voice visualization and more.
+
 # Quickstart
 
 This library is built to be used both server-side (Node.js) and in browser (React, Vue),
