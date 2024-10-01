@@ -84,7 +84,7 @@ const client = new RealtimeClient({ url: RELAY_SERVER_URL });
       1. [Manually using tools](#manually-using-tools)
    1. [Interrupting the model](#interrupting-the-model)
 1. [Client events](#client-events)
-   1. [Reference Client Utility Events](#reference-client-utility-events)
+   1. [Reference client utility events](#reference-client-utility-events)
 1. [Server events](#server-events)
 1. [Running tests](#running-tests)
 1. [Acknowledgements and contact](#acknowledgements-and-contact)
