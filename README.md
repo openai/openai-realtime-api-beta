@@ -81,6 +81,7 @@ const client = new RealtimeClient({ url: RELAY_SERVER_URL });
    1. [Sending messages](#sending-messages)
    1. [Sending streaming audio](#sending-streaming-audio)
    1. [Adding and using tools](#adding-and-using-tools)
+      1. [Manually using tools](#manually-using-tools)
    1. [Interrupting the model](#interrupting-the-model)
 1. [Client events](#client-events)
    1. [Reference Client Utility Events](#reference-client-utility-events)
@@ -188,6 +189,70 @@ client.addTool(
     return json;
   },
 );
+```
+
+### Manually using tools
+
+The `.addTool()` method automatically runs a tool handler and triggers a response
+on handler completion. Sometimes you may not want that, for example: using tools
+to generate a schema that you use for other purposes.
+
+In this case, we can use the `tools` item with `updateSession`. In this case you
+**must** specify `type: 'function'`, which is not required for `.addTool()`.
+
+**Note:** Tools added with `.addTool()` will **not** be overridden when updating
+sessions manually like this, but every `updateSession()` change will override previous
+`updateSession()` changes. Tools added via `.addTool()` are persisted and appended
+to anything set manually here.
+
+```javascript
+client.updateSession({
+  tools: [
+    {
+      type: 'function',
+      name: 'get_weather',
+      description:
+        'Retrieves the weather for a given lat, lng coordinate pair. Specify a label for the location.',
+      parameters: {
+        type: 'object',
+        properties: {
+          lat: {
+            type: 'number',
+            description: 'Latitude',
+          },
+          lng: {
+            type: 'number',
+            description: 'Longitude',
+          },
+          location: {
+            type: 'string',
+            description: 'Name of the location',
+          },
+        },
+        required: ['lat', 'lng', 'location'],
+      },
+    },
+  ],
+});
+```
+
+Then, to handle function calls...
+
+```javascript
+client.on('conversation.updated', ({ item, delta }) => {
+  if (item.type === 'function_call') {
+    // do something
+    if (delta.arguments) {
+      // populating the arguments
+    }
+  }
+});
+
+client.on('conversation.item.completed', ({ item }) => {
+  if (item.type === 'function_call') {
+    // your function call is complete, execute some custom code
+  }
+});
 ```
 
 ## Interrupting the model
