@@ -82,7 +82,7 @@ export async function run({ debug = false } = {}) {
       expect(serverEvent1.event.type).to.equal('session.created');
     });
 
-    it('Should send an audio file about toronto (.wav)', () => {
+    it('Should send an audio file about toronto (.mp3)', () => {
       const sample = samples['toronto-mp3'].base64;
       const content = [{ type: 'input_audio', audio: sample }];
 
