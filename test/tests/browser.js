@@ -74,6 +74,8 @@ export async function run({ debug = false } = {}) {
 
         expect(serverEvent1.source).to.equal('server');
         expect(serverEvent1.event.type).to.equal('session.created');
+
+        console.log(`[Session ID] ${serverEvent1.event.session.id}`);
       });
 
       it('Should send a simple hello message (text)', () => {
