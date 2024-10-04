@@ -4,7 +4,6 @@
  */
 /**
  * @typedef {Object} AudioTranscriptionType
- * @property {boolean} [enabled]
  * @property {"whisper-1"} model
  */
 /**
@@ -314,7 +313,6 @@ export class RealtimeClient extends RealtimeEventHandler {
  */
 export type AudioFormatType = "pcm16" | "g711_ulaw" | "g711_alaw";
 export type AudioTranscriptionType = {
-    enabled?: boolean;
     model: "whisper-1";
 };
 export type TurnDetectionServerVadType = {
