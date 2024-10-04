@@ -8,10 +8,6 @@ export async function run({ debug = false } = {}) {
     let client;
     let realtimeEvents = [];
 
-    before(async () => {
-      globalThis.WebSocket = void 0;
-    });
-
     it('Should instantiate the RealtimeClient', () => {
       client = new RealtimeClient({
         apiKey: process.env.OPENAI_API_KEY,

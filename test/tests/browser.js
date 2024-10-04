@@ -11,6 +11,12 @@ export async function run({ debug = false } = {}) {
     before(async () => {
       const WebSocket = (await import('websocket')).default.w3cwebsocket;
       globalThis.WebSocket = WebSocket;
+      globalThis.document = {};
+    });
+
+    after(async () => {
+      globalThis.WebSocket = void 0;
+      globalThis.document = void 0;
     });
 
     it('Should fail to instantiate the RealtimeClient when "dangerouslyAllowAPIKeyInBrowser" is not set', () => {
