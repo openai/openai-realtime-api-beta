@@ -1,6 +1,6 @@
 /**
  * Valid audio formats
- * @typedef {"pcm16"|"g711-ulaw"|"g711-alaw"} AudioFormatType
+ * @typedef {"pcm16"|"g711_ulaw"|"g711_alaw"} AudioFormatType
  */
 /**
  * @typedef {Object} AudioTranscriptionType
@@ -312,7 +312,7 @@ export class RealtimeClient extends RealtimeEventHandler {
 /**
  * Valid audio formats
  */
-export type AudioFormatType = "pcm16" | "g711-ulaw" | "g711-alaw";
+export type AudioFormatType = "pcm16" | "g711_ulaw" | "g711_alaw";
 export type AudioTranscriptionType = {
     enabled?: boolean;
     model: "whisper-1";
