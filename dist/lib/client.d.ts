@@ -74,7 +74,7 @@
  * @property {string|null} [previous_item_id]
  * @property {"message"} type
  * @property {ItemStatusType} status
- * @property {"system"} role
+ * @property {"user"} role
  * @property {Array<InputTextContentType|InputAudioContentType>} content
  */
 /**
@@ -385,7 +385,7 @@ export type UserItemType = {
     previous_item_id?: string | null;
     type: "message";
     status: ItemStatusType;
-    role: "system";
+    role: "user";
     content: Array<InputTextContentType | InputAudioContentType>;
 };
 export type AssistantItemType = {
