@@ -246,6 +246,8 @@ export interface ServerEvent {
   'input_audio_buffer.speech_started': {
     event_id: string;
     type: 'input_audio_buffer.speech_started';
+    item_id: string;
+    audio_start_ms: number;
   }
   'input_audio_buffer.speech_stopped': {
     event_id: string;
@@ -306,6 +308,7 @@ export interface ServerEvent {
     output_index: number;
     call_id: string;
     arguments: string;
+    delta: string;
   }
   'response.function_call_arguments.done': {
     event_id: string;
@@ -365,3 +368,6 @@ export type Listener = <K extends keyof AllMap>(event: K, listener: (data: AllMa
 export type ListenerBool = <K extends keyof AllMap>(event: K, listener: (data: AllMap[K]) => void) => boolean;
 export type WaitForNext = <K extends keyof AllMap>(event: K, timeout?: number) => Promise<AllMap[K] | null>;
 export type EventNames = keyof AllMap;
+export type EventProcessors = {
+  [K in keyof AllMap]?: (data: AllMap[K]) => void;
+};
