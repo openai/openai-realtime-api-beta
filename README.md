@@ -29,7 +29,7 @@ const client = new RealtimeClient({ apiKey: process.env.OPENAI_API_KEY });
 client.updateSession({ instructions: 'You are a great, upbeat friend.' });
 client.updateSession({ voice: 'alloy' });
 client.updateSession({
-  turn_detection: { type: 'none' }, // or 'server_vad'
+  turn_detection: null, // or { type: 'server_vad' }
   input_audio_transcription: { model: 'whisper-1' },
 });
 
@@ -130,7 +130,7 @@ client.sendUserMessageContent([
 
 ## Sending streaming audio
 
-To send streaming audio, use the `.appendInputAudio()` method. If you're in `turn_detection: 'disabled'` mode,
+To send streaming audio, use the `.appendInputAudio()` method. If you're in `turn_detection: null` mode,
 then you need to use `.createResponse()` to tell the model to respond.
 
 ```javascript
@@ -257,7 +257,7 @@ client.on('conversation.item.completed', ({ item }) => {
 
 ## Interrupting the model
 
-You may want to manually interrupt the model, especially in `turn_detection: 'disabled'` mode.
+You may want to manually interrupt the model, especially in `turn_detection: null` mode.
 To do this, we can use:
 
 ```javascript
