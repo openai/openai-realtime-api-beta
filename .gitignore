@@ -1,3 +1,14 @@
+# macOS system files
 .DS_Store
+
+# IDE directories and files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Node modules
 node_modules/
+
+# Environment variables
 .env
