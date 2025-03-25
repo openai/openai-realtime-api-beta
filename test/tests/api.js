@@ -48,6 +48,19 @@ export async function run() {
       expect(realtime.isConnected()).to.equal(false);
     });
 
+    it('Should connect to the RealtimeAPI with a model', async () => {
+      const model = 'gpt-4o-mini-realtime-preview-2024-12-17';
+      realtime = new RealtimeAPI({
+        apiKey: process.env.OPENAI_API_KEY,
+        debug,
+      });
+      realtime.connect({ model });
+      const session = await new Promise((resolve) => {
+        realtime.on('server.session.created', event => resolve(event.session));
+      });
+      expect(session.model).to.equal(model);
+    });
+
     after(() => {
       realtime.isConnected() && realtime.disconnect();
     });

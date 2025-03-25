@@ -11,6 +11,7 @@ export class RealtimeAPI extends RealtimeEventHandler {
         debug?: boolean;
     });
     defaultUrl: string;
+    defaultModel: string;
     url: string;
     apiKey: string;
     debug: boolean;
