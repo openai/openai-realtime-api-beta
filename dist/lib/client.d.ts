@@ -14,6 +14,13 @@
  * @property {number} [silence_duration_ms]
  */
 /**
+ * @typedef {Object} TurnDetectionSemanticVadType
+ * @property {"semantic_vad"} type
+ * @property {boolean} [create_response]
+ * @property {boolean} [interrupt_response]
+ * @property {"auto"|"low"|"medium"|"high"} [eagerness]
+ */
+/**
  * Tool definitions
  * @typedef {Object} ToolDefinitionType
  * @property {"function"} [type]
@@ -30,7 +37,7 @@
  * @property {AudioFormatType} [input_audio_format]
  * @property {AudioFormatType} [output_audio_format]
  * @property {AudioTranscriptionType|null} [input_audio_transcription]
- * @property {TurnDetectionServerVadType|null} [turn_detection]
+ * @property {TurnDetectionServerVadType|TurnDetectionSemanticVadType|null} [turn_detection]
  * @property {ToolDefinitionType[]} [tools]
  * @property {"auto"|"none"|"required"|{type:"function",name:string}} [tool_choice]
  * @property {number} [temperature]
@@ -235,9 +242,9 @@ export class RealtimeClient extends RealtimeEventHandler {
     disconnect(): void;
     /**
      * Gets the active turn detection mode
-     * @returns {"server_vad"|null}
+     * @returns {"server_vad"|"semantic_vad"|null}
      */
-    getTurnDetectionType(): "server_vad" | null;
+    getTurnDetectionType(): "server_vad" | "semantic_vad" | null;
     /**
      * Add a tool and handler
      * @param {ToolDefinitionType} definition
@@ -321,6 +328,12 @@ export type TurnDetectionServerVadType = {
     prefix_padding_ms?: number;
     silence_duration_ms?: number;
 };
+export type TurnDetectionSemanticVadType = {
+    type: "semantic_vad";
+    create_response?: boolean;
+    interrupt_response?: boolean;
+    eagerness?: "auto" | "low" | "medium" | "high";
+};
 /**
  * Tool definitions
  */
@@ -341,7 +354,7 @@ export type SessionResourceType = {
     input_audio_format?: AudioFormatType;
     output_audio_format?: AudioFormatType;
     input_audio_transcription?: AudioTranscriptionType | null;
-    turn_detection?: TurnDetectionServerVadType | null;
+    turn_detection?: TurnDetectionServerVadType | TurnDetectionSemanticVadType | null;
     tools?: ToolDefinitionType[];
     tool_choice?: "auto" | "none" | "required" | {
         type: "function";

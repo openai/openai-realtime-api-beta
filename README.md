@@ -29,7 +29,7 @@ const client = new RealtimeClient({ apiKey: process.env.OPENAI_API_KEY });
 client.updateSession({ instructions: 'You are a great, upbeat friend.' });
 client.updateSession({ voice: 'alloy' });
 client.updateSession({
-  turn_detection: { type: 'none' }, // or 'server_vad'
+  turn_detection: { type: 'none' }, // or 'server_vad' or 'semantic_vad'
   input_audio_transcription: { model: 'whisper-1' },
 });
 
