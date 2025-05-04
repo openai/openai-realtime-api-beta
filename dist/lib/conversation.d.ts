@@ -66,7 +66,7 @@ export class RealtimeConversation {
         'response.audio.delta': (event: any) => {
             item: any;
             delta: {
-                audio: Int16Array;
+                audio: Int16Array<ArrayBuffer>;
             };
         };
         'response.text.delta': (event: any) => {
@@ -82,7 +82,7 @@ export class RealtimeConversation {
             };
         };
     };
-    queuedInputAudio: Int16Array;
+    queuedInputAudio: Int16Array<ArrayBufferLike>;
     /**
      * Clears the conversation history and resets to default
      * @returns {true}
