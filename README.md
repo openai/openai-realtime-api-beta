@@ -365,6 +365,14 @@ client.on('realtime.event', ({ time, source, event }) => {
 
 # Running tests
 
+The event-handler regression tests run offline without API credentials:
+
+```shell
+$ npx mocha ./test/event_handler.js
+```
+
+They also run as part of the complete suite below.
+
 You will need to make sure you have a `.env` file with `OPENAI_API_KEY=` set in order
 to run tests. From there, running the test suite is easy.
 
